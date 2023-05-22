@@ -1,5 +1,6 @@
 import * as Matter from 'matter-js';
 import { initializeCharacterMatter } from './character';
+import { initializeStages } from './stage';
 
 let engine: Matter.Engine;
 let render: Matter.Render;
@@ -16,16 +17,19 @@ async function initializeMatter(el: HTMLElement) {
 		options: {
 			width: matterElement.clientWidth,
 			height: matterElement.clientHeight,
-			background: '#001d3d',
+			background: 'transparent',
 			wireframes: false,
 			hasBounds: true
 		}
 	});
 
 	let ground = Matter.Bodies.rectangle(400, 800, 20000, 60, { isStatic: true });
+	let leftWall = Matter.Bodies.rectangle(-800, 800, 500, 20000, { isStatic: true });
+
+	initializeStages();
 	initializeCharacterMatter();
 
-	Matter.World.add(engine.world, [ground]);
+	Matter.World.add(engine.world, [ground, leftWall]);
 	Matter.Render.run(render);
 
 	runner = Matter.Runner.create();
@@ -85,12 +89,14 @@ function elementToPhysics(element: HTMLElement) {
 		element.textContent = '';
 
 		let leftSum = 0;
+		let lastWidth = 10;
+
 		const bodies: Matter.Body[] = [];
 		for (const char of characters) {
 			const charElement = document.createElement('span');
 			charElement.textContent = char;
 			if (char === ' ') {
-				leftSum += 10;
+				leftSum += lastWidth;
 				continue;
 			}
 
@@ -100,6 +106,7 @@ function elementToPhysics(element: HTMLElement) {
 			element.appendChild(charElement);
 
 			leftSum += charElement.clientWidth;
+			lastWidth = charElement.clientWidth;
 			bodies.push(addBody(charElement));
 		}
 

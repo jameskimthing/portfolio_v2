@@ -2,6 +2,6 @@
 	import '../app.css';
 </script>
 
-<div class="bg-yellow-50 relative overflow-hidden">
+<div class="relative overflow-hidden font-mono">
 	<slot />
 </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { character, characterPosition } from '$lib/character';
 	import { engine, render as matterRender } from '$lib/matter';
+	import { stage, stageUnit } from '$lib/stage';
 	import Matter from 'matter-js';
 
 	let position: { x: number; y: number } = { x: 0, y: 0 };
@@ -23,21 +24,35 @@
 	});
 </script>
 
-<div class="absolute z-50 top-0 left-0 bg-white p-2 flex flex-col">
-	<div class="flex flex-row justify-between">
-		<div>Character Render pos</div>
-		<div>
+<table class="absolute z-50 bottom-0 left-0 bg-white p-2 border-separate border-spacing-2 scale-75">
+	<tr>
+		<th>Name</th>
+		<th>Stat</th>
+	</tr>
+	<tr>
+		<td>Character Render pos</td>
+		<td>
 			x: {Math.floor($characterPosition.x)} y: {Math.floor($characterPosition.y)}
-		</div>
-	</div>
+		</td>
+	</tr>
 
-	<div class="flex flex-row justify-between">
-		<div>Position</div>
-		<div>{JSON.stringify(position)}</div>
-	</div>
+	<tr>
+		<td>Position</td>
+		<td>{JSON.stringify(position)}</td>
+	</tr>
 
-	<div class="flex flex-row justify-between">
-		<div class="pr-4">Render Bounds</div>
-		<div>{JSON.stringify(renderBounds)}</div>
-	</div>
-</div>
+	<tr>
+		<td>Render Bounds</td>
+		<td>{JSON.stringify(renderBounds)}</td>
+	</tr>
+
+	<tr>
+		<td>Current Stage</td>
+		<td>{$stage}</td>
+	</tr>
+
+	<tr>
+		<td>Stage Unit</td>
+		<td>{$stageUnit}</td>
+	</tr>
+</table>

@@ -4,21 +4,31 @@
 	import { onMount } from 'svelte';
 	import Introduction from './Introduction.svelte';
 	import Stats from '$lib/components/Stats.svelte';
+	import Loading from '$lib/components/Loading.svelte';
+	import { stageUnit } from '$lib/stage';
+	import About from './About.svelte';
 
 	let canvas: HTMLElement;
-	let loadingMatter: boolean = true;
+	let isLoading: boolean = true;
 	onMount(async () => {
 		await initializeMatter(canvas);
-		loadingMatter = false;
+		isLoading = false;
 	});
 </script>
 
-<div class="w-screen h-screen bg-blue-0 overflow-hidden" bind:this={canvas} />
-{#if !loadingMatter}
+<div class="w-screen h-screen overflow-hidden" bind:this={canvas} />
+<Loading {isLoading} />
+
+{#if !isLoading}
 	<Stats />
 	<Character />
 {/if}
 
-<div class="absolute z-10 top-0 left-0">
+<img class="absolute inset-0 -z-50 object-contain" alt="none?" src="/background/background-1.jpg" />
+
+<div class="absolute top-0 left-0">
 	<Introduction />
+	{#if $stageUnit >= 2}
+		<About />
+	{/if}
 </div>

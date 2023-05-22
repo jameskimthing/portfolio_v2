@@ -87,7 +87,8 @@ async function initializeCharacter(): Promise<string[]> {
 
 				Matter.Bounds.shift(render.bounds, {
 					x: pos.x - window.innerWidth / 4,
-					y: pos.y - window.innerHeight / 2
+					y: renderBounds.min.y
+					// y: pos.y - (window.innerHeight * 6) / 7
 				});
 			});
 			resolve(characterFrames);
