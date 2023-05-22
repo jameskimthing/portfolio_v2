@@ -3,6 +3,8 @@
 	import { initializeMatter } from '$lib/matter';
 	import { onMount } from 'svelte';
 	import Introduction from './Introduction.svelte';
+	import { characterPosition } from '$lib/character';
+	import Stats from '$lib/components/Stats.svelte';
 
 	let canvas: HTMLElement;
 	let loadingMatter: boolean = true;
@@ -18,5 +20,6 @@
 {/if}
 
 <div class="absolute z-10 top-0 left-0">
+	<Stats />
 	<Introduction />
 </div>

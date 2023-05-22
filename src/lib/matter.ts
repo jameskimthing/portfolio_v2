@@ -17,7 +17,7 @@ async function initializeMatter(el: HTMLElement) {
 			width: matterElement.clientWidth,
 			height: matterElement.clientHeight,
 			background: '#001d3d',
-			// wireframes: false,
+			wireframes: false,
 			hasBounds: true
 		}
 	});
@@ -60,9 +60,10 @@ function elementToPhysics(element: HTMLElement) {
 		);
 
 		Matter.Events.on(engine, 'beforeUpdate', () => {
+			const renderBounds = render.bounds;
 			const pos = body.position;
-			el.style.left = pos.x - width / 2 + 'px';
-			el.style.top = pos.y - height / 2 + 'px';
+			el.style.left = pos.x - width / 2 - renderBounds.min.x + 'px';
+			el.style.top = pos.y - height / 2 - renderBounds.min.y + 'px';
 			el.style.transform = `rotate(${body.angle}rad)`;
 		});
 

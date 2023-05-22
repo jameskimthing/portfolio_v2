@@ -79,13 +79,14 @@ async function initializeCharacter(): Promise<string[]> {
 
 				Matter.Body.setVelocity(character, { y: prev.y, x: x });
 				const pos = character.position;
+				const renderBounds = render.bounds;
 				characterPosition.set({
-					x: pos.x - CHARACTER_WIDTH / 2,
-					y: pos.y - CHARACTER_HEIGHT / 2
+					x: pos.x - CHARACTER_WIDTH / 2 - renderBounds.min.x,
+					y: pos.y - CHARACTER_HEIGHT / 2 - renderBounds.min.y
 				});
 
 				Matter.Bounds.shift(render.bounds, {
-					x: pos.x - window.innerWidth / 2,
+					x: pos.x - window.innerWidth / 4,
 					y: pos.y - window.innerHeight / 2
 				});
 			});
@@ -141,6 +142,7 @@ export {
 	initializeCharacterMatter,
 	CHARACTER_HEIGHT,
 	CHARACTER_WIDTH,
-	characterPosition
+	characterPosition,
+	character
 };
 export { movingStates, characterKeyDown, characterKeyUp };
