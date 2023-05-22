@@ -3,7 +3,6 @@
 	import { initializeMatter } from '$lib/matter';
 	import { onMount } from 'svelte';
 	import Introduction from './Introduction.svelte';
-	import { characterPosition } from '$lib/character';
 	import Stats from '$lib/components/Stats.svelte';
 
 	let canvas: HTMLElement;
@@ -14,12 +13,12 @@
 	});
 </script>
 
-<div class="w-screen h-screen bg-yellow-800 overflow-hidden" bind:this={canvas} />
+<div class="w-screen h-screen bg-blue-0 overflow-hidden" bind:this={canvas} />
 {#if !loadingMatter}
+	<Stats />
 	<Character />
 {/if}
 
 <div class="absolute z-10 top-0 left-0">
-	<Stats />
 	<Introduction />
 </div>

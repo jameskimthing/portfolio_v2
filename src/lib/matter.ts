@@ -46,9 +46,10 @@ function elementToPhysics(element: HTMLElement) {
 		const width = rect.right - rect.left;
 		const height = rect.bottom - rect.top;
 
+		const renderBounds = render.bounds;
 		const body = Matter.Bodies.rectangle(
-			rect.left + width / 2,
-			rect.top + height / 2,
+			rect.left + width / 2 + renderBounds.min.x,
+			rect.top + height / 2 + renderBounds.min.y,
 			width,
 			height,
 			{

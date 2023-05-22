@@ -23,9 +23,9 @@
 	});
 </script>
 
-<div class="absolute top-0 left-0 bg-white p-2 flex flex-col">
+<div class="absolute z-50 top-0 left-0 bg-white p-2 flex flex-col">
 	<div class="flex flex-row justify-between">
-		<div>Character pos</div>
+		<div>Character Render pos</div>
 		<div>
 			x: {Math.floor($characterPosition.x)} y: {Math.floor($characterPosition.y)}
 		</div>
