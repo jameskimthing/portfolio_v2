@@ -5,7 +5,11 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 const skills = [
 	'JavaScript (ES6)',
 	'TypeScript',
-	'PNPM',
+	'pnpm',
+	'npm',
+	'Github',
+	'Flutter',
+	'CSS',
 	'Svelte',
 	'Firebase',
 	'Supabase',
@@ -16,7 +20,9 @@ const skills = [
 	'Tailwind',
 	'HTML',
 	'Three js',
-	'SQL'
+	'Matter js',
+	'SQL',
+	'AWS'
 ];
 
 let mouseX: number = 0.5;
@@ -116,4 +122,24 @@ function initializeSphere(con: HTMLDivElement) {
 	animate();
 }
 
-export { initializeSphere, setMouseSphereLocation };
+function removeSphere() {
+	if (!camera) return;
+
+	mouseX = 0.5;
+	mouseY = 0.5;
+	continueAnimation = false;
+
+	scene.children.forEach(function (object) {
+		scene.remove(object);
+		if (object instanceof THREE.Mesh) {
+			if (object.geometry) object.geometry.dispose();
+			if (object.material) object.material.dispose();
+		}
+	});
+	scene.children = [];
+
+	scene.remove(camera);
+	camera = null;
+}
+
+export { initializeSphere, setMouseSphereLocation, removeSphere };

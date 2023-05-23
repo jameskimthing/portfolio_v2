@@ -5,7 +5,6 @@
 	import Introduction from './Introduction.svelte';
 	import Stats from '$lib/components/Stats.svelte';
 	import Loading from '$lib/components/Loading.svelte';
-	import { stageUnit } from '$lib/stage';
 	import About from './About.svelte';
 
 	let canvas: HTMLElement;
@@ -28,7 +27,5 @@
 
 <div class="absolute top-0 left-0">
 	<Introduction />
-	{#if $stageUnit >= 2}
-		<About />
-	{/if}
+	<About />
 </div>
